@@ -1,0 +1,22 @@
+{% extends 'product_temp/base_ecomm.html' %} {% block start %}
+              <div class="card bg-glass">
+                    {% if message_error %}
+                    <div style="text-align: center;" class="alert alert-danger" style="white-space: pre-line;">
+                        {{ message_error}}
+                    </div>
+                    {% elif message_succ %}
+                    <div style="text-align: center;" class="alert alert-success" style="white-space: pre-line;">
+
+                        {{ message_succ }}
+
+                    </div>
+                    {% comment %} <a href="{% url 'index_page' %}" class="link_404">Go to Home</a> {% endcomment %}
+                    {% endif %}
+
+              {% comment %} </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section> {% endcomment %}
+  {% endblock %}

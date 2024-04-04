@@ -1,0 +1,65 @@
+{% extends 'product_temp/base_ecomm.html' %}
+{% load static %}
+
+{% block start %}
+<div class="section">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="section-title text-center">
+          <h2 class="title">Ordered Products</h2>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-4">
+        <div class="card mb-4">
+          <div class="card-header bg-success text-white">
+            <h5 class="mb-0">Order Summary</h5>
+          </div>
+          <div class="card-body">
+            <div class="mb-3">
+              <h6 class="mb-0">Number of Items:</h6>
+              <h6 class="text-muted">{{ order_item_count }}</h6>
+            </div>
+            <div class="mb-3">
+              <h6 class="mb-0">Status:</h6>
+              <h6 class="text-muted">{{ order_status }}</h6>
+            </div>
+            <div class="mb-3">
+              <h6 class="mb-0">Total Amount:</h6>
+              <h6 class="text-muted">{{ total_amount }} birr</h6>
+            </div>
+            <div class="mb-3">
+              <h6 class="mb-0">Shipping Method:</h6>
+              <h6 class="text-muted">{{ shipping_method }}</h6>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-8">
+        <div class="products-tabs">
+          <div id="tab1" class="tab-pane active">
+            <div class="row">
+              {% for order in order_item %}
+              <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card h-100">
+                  <hr>
+                  <img src="/media/{{ order.product.image1 }}" class="card-img-top img-fluid" style="height: 200px; width: 100%; object-fit: cover;" alt="{{ order.product.brand_name }}">
+                  <div class="card-body">
+                    <h5 class="card-title">{{ order.product.brand_name }}</h5>
+                    <p class="card-text">Price: {{ order.product.price }} birr</p>
+                    <p class="card-text">Amount: {{ order.quantity }}</p>
+                    <hr>
+                  </div>
+                </div>
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

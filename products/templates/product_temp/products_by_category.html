@@ -1,0 +1,113 @@
+{% extends 'product_temp/base_ecomm.html' %}
+{% load static %}
+{% block start %}
+<!-- SECTION -->
+<div class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <!-- STORE -->
+            <div id="store" class="col-md-12">
+                <!-- store products -->
+                <div class="row">
+                    {% if all_products %}
+                    {% for product in all_products %}
+                    <div class="col-md-3 col-sm-6">
+                        <div class="product">
+                            <div class="product-img">
+                                    <img src="/media/{{ product.image1 }}" alt="{{ product.brand_name }}" class="img-responsive">
+                            </div>
+                            <div class="product-body">
+                                <h3 class="product-name">
+                                    <a href="#">{{ product.brand_name }}</a>
+                                </h3>
+                                <h6 class="product-category">
+                                    <a href="#">{{ product.category.name }}</a>
+                                </h6>
+                                {% if product.discounted_price != Null %}
+                                <h4 class="product-price">
+                                    {{ product.discounted_price }} birr
+                                    <del class="product-old-price">{{ product.price }} birr</del>
+                                </h4>
+                                {% else %}
+                                <h4 class="product-price">
+                                    {{ product.price }} birr
+                                </h4>
+                                {% endif %}
+                                <div class="product-btns">
+                                    <button class="add-to-wishlist">
+                                        <svg xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewBox="0 0 512 512">
+                                            <path d="M47.6 300.4L228.3 469.1c7.5 7 17.4 10.9 27.7 10.9s20.2-3.9 27.7-10.9L464.4 300.4c30.4-28.3 47.6-68 47.6-109.5v-5.8c0-69.9-50.5-129.5-119.4-141C347 36.5 300.6 51.4 268 84L256 96 244 84c-32.6-32.6-79-47.5-124.6-39.9C50.5 55.6 0 115.2 0 185.1v5.8c0 41.5 17.2 81.2 47.6 109.5z"/>
+                                        </svg>
+                                        <span class="tooltipp">Add to Wishlist</span>
+                                    </button>
+                                    <a href="{% url 'product_detail' product.unique_id %}" class="quick-view">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
+                                            <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0"/>
+                                            <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8m8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7"/>
+                                        </svg>
+                                    </a>
+                                    &nbsp;&nbsp;&nbsp;
+                                    <a href="{% url 'Add_cart' product.unique_id %}" class="quick-view">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart-plus-fill" viewBox="0 0 16 16">
+                                            <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0m7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0M9 5.5V7h1.5a.5.5 0 0 1 0 1H9v1.5a.5.5 0 0 1-1 0V8H6.5a.5.5 0 0 1 0-1H8V5.5a.5.5 0 0 1 1 0"/>
+                                          </svg>
+                                    </a>
+                                </div>
+                                <div class="product-btns">
+                                    <a class="primary-btn cta-btn" href="{% url 'order_page' product.unique_id %}">Shop Now</a>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    {% endfor %}
+                    {% else %}
+                    <p class="text-center">No product Found</p>
+                    {% endif %}
+                </div>
+                <!-- /store products -->
+
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-md-9">
+                            <nav aria-label="Pagination">
+                                <ul class="pagination">
+                                    {% if all_products.has_previous %}
+                                    <li class="page-item">
+                                        <a class="page-link" href="?page={{ all_products.previous_page_number }}">
+                                            <span aria-hidden="true">&laquo;</span>
+                                        </a>
+                                    </li>
+                                    {% endif %}
+                                    {% for num in all_products.paginator.page_range %}
+                                    <li class="page-item{% if all_products.number == num %} active{% endif %}">
+                                        <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                                    </li>
+                                    {% endfor %}
+                                    {% if all_products.has_next %}
+                                    <li class="page-item">
+                                        <a class="page-link" href="?page={{ all_products.next_page_number }}">
+                                            <span aria-hidden="true">&raquo;</span>
+                                        </a>
+                                    </li>
+                                    {% endif %}
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /STORE -->
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- /SECTION -->
+{% endblock %}
+
+{% block extra_scripts %}
+<script src="{% static 'js/app.js' %}"></script>
+{% endblock %}

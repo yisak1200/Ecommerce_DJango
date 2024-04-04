@@ -1,0 +1,243 @@
+{% extends 'product_temp/base_ecomm.html' %} {% block start %}
+<div class="section">
+  <!-- container -->
+  <div class="container">
+    <!-- row -->
+    <div class="row">
+      <!-- Product main img -->
+      <div class="col-md-5 col-md-push-2">
+        <div id="product-main-img">
+          <div class="product-preview">
+            <img
+                src="/media/{{product.image1}}"
+                alt="{{product.brand_name}}"
+                class="img-responsive img-curve"
+            />
+          </div>
+          <div class="product-preview">
+            <img
+                src="/media/{{product.image2}}"
+                alt="{{product.brand_name}}"
+                class="img-responsive img-curve"
+            />
+          </div>
+          <div class="product-preview">
+           <img
+                src="/media/{{product.image3}}"
+                alt="{{product.brand_name}}"
+                class="img-responsive img-curve"
+            />
+          </div>
+        </div>
+      </div>
+      <!-- /Product main img -->
+
+      <!-- Product thumb imgs -->
+
+      <div class="col-md-2 col-md-pull-5">
+        <div id="product-imgs">
+          <div class="product-preview">
+            <img
+                src="/media/{{product.image1}}"
+                alt="{{product.brand_name}}"
+                class="img-responsive img-curve"
+            />
+          </div>
+          <div class="product-preview">
+            <img
+                src="/media/{{product.image2}}"
+                alt="{{product.brand_name}}"
+                class="img-responsive img-curve"
+            />
+          </div>
+          <div class="product-preview">
+            <img
+                src="/media/{{product.image3}}"
+                alt="{{product.brand_name}}"
+                class="img-responsive img-curve"
+            />
+          </div>
+        </div>
+      </div>
+
+      <!-- /Product thumb imgs -->
+
+      <!-- Product details -->
+      <div class="col-md-5">
+        <div class="product-details">
+          <h2 class="product-name">{{product.brand_name}}</h2>
+          <div></div>
+          <div>
+            <h3 class="product-price">
+              <h3 class="product-price">{{ product.price }} birr 
+                <!-- <del class="product-old-price">$990.00</del> -->
+            </h3>
+            {% if product.featured == False %}
+                <span class="product-available">In Stock</span>
+            {% else %}
+                <span class="product-available">Featured</span>
+            {% endif %}
+            
+          </div>
+          <p>{{ product.description|truncatewords:30 }}</p>
+
+          {% comment %}
+          <div class="product-options">
+            <label>
+              Size
+              <select class="input-select">
+                <option value="0">X</option>
+              </select>
+            </label>
+            <label>
+              Color
+              <select class="input-select">
+                <option value="0">Red</option>
+              </select>
+            </label>
+          </div>
+          {% endcomment %}
+          {% if product.featured == False %}
+          <div class="add-to-cart">
+            <a href="{% url 'Add_cart' product.unique_id %}">
+              <button class="add-to-cart-btn">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  height="16"
+                  width="18"
+                  viewBox="0 0 576 512"
+                >
+                  <!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                  <path
+                    d="M0 24C0 10.7 10.7 0 24 0H69.5c22 0 41.5 12.8 50.6 32h411c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3H170.7l5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5H488c13.3 0 24 10.7 24 24s-10.7 24-24 24H199.7c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5H24C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z"
+                  />
+                </svg>
+
+                add to cart
+              </button></a
+            >
+          </div>
+          {% else %}
+          <div class="add-to-cart"></div>
+          {% endif %}
+        </div>
+      </div>
+      <!-- /Product details -->
+
+      <!-- Product tab -->
+      <div class="col-md-12">
+        <div id="product-tab">
+          <!-- product tab nav -->
+          <ul class="tab-nav">
+            <li class="active">
+              <a data-toggle="tab" href="#tab1">Detail Description</a>
+            </li>
+          </ul>
+          <!-- /product tab nav -->
+
+          <!-- product tab content -->
+          <div class="tab-content">
+            <!-- tab1  -->
+            <div id="tab1" class="tab-pane fade in active">
+              <div class="row">
+                <div class="col-md-12">
+                  <p>{{product.description}}</p>
+                </div>
+              </div>
+            </div>
+            <!-- Section -->
+		<div class="section">
+			<!-- container -->
+			<div class="container">
+				<!-- row -->
+				<div class="row">
+
+					<div class="col-md-12">
+						<div class="section-title text-center">
+							<h3 class="title">Related Products</h3>
+						</div>
+					</div>
+          <div class="col-md-12">
+            <div class="row">
+              <div class="products-tabs">
+                <!-- tab -->
+                <div id="tab1" class="tab-pane active">
+                  <div class="products-slick" data-nav="#slick-nav-1">
+					<!-- product -->
+				  {% for new in related_products %}
+                <div class="product">
+                  <div class="product-img">
+                   <img src="/media/{{ new.image1 }}" alt="product image" />
+                    <div class="product-label">
+                      <span class="new">NEW</span>
+                    </div>
+                  </div>
+                  <div class="product-body">
+                    <p class="product-category"></p>
+                    <h3 class="product-name">
+                      <a href="#">{{new.brand_name}}</a>
+                    </h3>
+                    {% if new.discounted_price != Null %}
+                    <h4 class="product-price">
+                      {{new.discounted_price}} birr
+                      <del class="product-old-price"
+                        >{{new.price}} birr</del
+                      >
+                      {% else %}
+                      <h4 class="product-price">
+                      {{new.price}} birr
+                      {% comment %} <del class="product-old-price"
+                        >{{new.discounted_price}}</del
+                      > {% endcomment %}
+                      {% endif %}
+                    </h4>
+                    <div class="product-btns">
+                      <button class="add-to-wishlist">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M47.6 300.4L228.3 469.1c7.5 7 17.4 10.9 27.7 10.9s20.2-3.9 27.7-10.9L464.4 300.4c30.4-28.3 47.6-68 47.6-109.5v-5.8c0-69.9-50.5-129.5-119.4-141C347 36.5 300.6 51.4 268 84L256 96 244 84c-32.6-32.6-79-47.5-124.6-39.9C50.5 55.6 0 115.2 0 185.1v5.8c0 41.5 17.2 81.2 47.6 109.5z"/></svg>
+                    <span class="tooltipp">add to wishlist</span>
+                      </button>
+                      <a href="{% url 'product_detail' new.unique_id %}" class="quick-view"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
+                        <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0"/>
+                        <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8m8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7"/>
+                      </svg></a>
+                      &nbsp;&nbsp;&nbsp;
+                      <a href="{% url 'Add_cart' new.unique_id %}" class="quick-view">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart-plus-fill" viewBox="0 0 16 16">
+                              <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0m7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0M9 5.5V7h1.5a.5.5 0 0 1 0 1H9v1.5a.5.5 0 0 1-1 0V8H6.5a.5.5 0 0 1 0-1H8V5.5a.5.5 0 0 1 1 0"/>
+                            </svg>
+                      </a>
+                    </div>
+                    <div class="product-btns">
+                          <a class="primary-btn cta-btn" href="{% url 'order_page' new.unique_id %}">Shop now</a>
+												</div>
+                  </div>
+                  
+                </div>
+
+                <!-- /product -->
+                {% endfor %}
+					<!-- /product -->
+        </div>
+        <div id="slick-nav-1" class="products-slick-nav"></div>
+      </div>
+      <!-- /tab -->
+    </div>
+  </div>
+</div>
+				</div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+		</div>
+		<!-- /Section -->
+          </div>
+          <!-- /product tab content  -->
+        </div>
+      </div>
+      <!-- /product tab -->
+    </div>
+    <!-- /row -->
+  </div>
+  <!-- /container -->
+</div>
+{% endblock %}
