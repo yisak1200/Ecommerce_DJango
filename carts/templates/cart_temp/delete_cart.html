@@ -1,0 +1,18 @@
+{% extends 'product_temp/base_ecomm.html' %} {% block start %}
+<div class="card bg-glass">
+  <div
+    style="text-align: center"
+    class="alert alert-danger"
+    style="white-space: pre-line"
+  >
+    <form method="post">
+      {% csrf_token %}
+      <div class="form-group">
+        <h5>Are You sure You want to Remove this item from Cart</h5>
+        <input type="submit" value="Yes" />
+        <a style="color: black" href="{% url 'my_cart' %}">No</a>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

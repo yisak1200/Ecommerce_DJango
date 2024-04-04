@@ -1,0 +1,133 @@
+{% extends 'product_temp/base_ecomm.html' %} {% block start %}
+<div class="section">
+  <!-- container -->
+  <div class="container">
+    <!-- row -->
+    <div class="row">
+      <div class="col-md-7">
+        <div class="card bg-glass">
+          {% if message %}
+          <div
+            style="text-align: center"
+            class="alert alert-danger"
+            style="white-space: pre-line"
+          >
+            {{ message}}
+          </div>
+          {% elif message_succ %}
+          <div
+            style="text-align: center"
+            class="alert alert-success"
+            style="white-space: pre-line"
+          >
+            {{ message_succ }}
+          </div>
+
+          {% endif %}
+          <div class="billing-details">
+            <div class="section-title">
+              <h3 class="title">Create Account</h3>
+            </div>
+            <form method="post">
+              {% csrf_token %}
+              <div class="form-group">
+                <input
+                  class="input"
+                  type="text"
+                  name="first_name"
+                  value="{{first_name}}"
+                  required
+                  placeholder="First Name"
+                />
+              </div>
+              <div class="form-group">
+                <input
+                  class="input"
+                  type="text"
+                  name="last_name"
+                  value="{{last_name}}"
+                  required
+                  placeholder="Last Name"
+                />
+              </div>
+              <div class="form-group">
+                <input
+                  class="input"
+                  type="number"
+                  name="phone_num"
+                  required
+                  value="{{phone_num}}"
+                  placeholder="Phone number"
+                />
+              </div>
+              <div class="form-group">
+                <input
+                  class="input"
+                  type="email"
+                  required
+                  name="email"
+                  value="{{email}}"
+                  placeholder="Email"
+                />
+              </div>
+              <div class="form-group">
+                <input
+                  class="input"
+                  type="text"
+                  name="address"
+                  required
+                  value="{{address}}"
+                  placeholder="Address"
+                />
+              </div>
+           
+              <div class="form-group">
+                <div class="password-toggle">
+            <input
+              class="input"
+              type="Password"
+              name="password"
+                required
+              placeholder="Password"
+              value="{{password}}"
+              {% comment %}  {% endcomment %}
+              id= "password"
+              {% comment %} value={{password}} {% endcomment %}
+            />
+            <span class="toggle-icon" onclick="togglePassword('password')">
+          <span id="login_eye-icon">&#x1F441;</span>
+        </span>
+            </div>
+              </div>
+              <div class="form-group">
+                <div class="password-toggle">
+            <input
+              class="input"
+              type="Password"
+              name="confirm_password"
+                required
+              placeholder="Confirm password"
+              id= 'confirm_password'
+              value="{{confirm_password}}"
+              {% comment %} value = {{confirm_password}} {% endcomment %}
+            />
+             <span class="toggle-icon" onclick="togglePassword('confirm_password')">
+          <span id="login_eye-icon">&#x1F441;</span>
+        </span>
+
+            </div>
+              </div>
+              <div class="form-group">
+                <button type="submit" class="btn btn-success btn-block mb-4">
+                  Create Account
+                </button>
+              </div>
+            </div>
+          </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+ {% endblock %}
